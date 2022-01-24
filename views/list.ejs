@@ -1,24 +1,28 @@
 <%- include("header") -%>
 
+<!-- heading of our page will be list title(date) -->
   <div class="box" id="heading">
     <h1> <%= listTitle %> </h1>
   </div>
-
   <div class="box">
 
-
+<%# looping will be done here, %>
   <%  newListItems.forEach(function(item){ %>
-
+    <!-- this form is for deleting elements from our list -->
+    <!-- this form is responsoble for deleting checked items. -->
     <form action="/delete" method="post">
       <div class="item">
+        <!-- to submit when checkbox is checked "onclick" has been added through stack overflow -->
+        <!-- and a post request will be send to our /elete route -->
         <input type="checkbox" name="checkbox" value="<%=item._id%>" onChange="this.form.submit()">
         <p><%=item.name%></p>
       </div>
+      <!-- this input of type ="hidden" is going to have a value -->
       <input type="hidden" name="listName" value="<%= listTitle %>"></input>
     </form>
   <%  }) %>
 
-
+<!-- this form is for adding items to our list -->
       <form class="item" action="/" method="post">
         <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
         <button type="submit" name="list" value="<%= listTitle %>">+</button>
